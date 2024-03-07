@@ -1,0 +1,7 @@
+#!/bin/bash
+lb config noauto \
+	--architectures i386 \
+	--linux-flavours 686-pae \
+	--binary-images hdd \
+	--debian-installer live \
+	"${@}"
