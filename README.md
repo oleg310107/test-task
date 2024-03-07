@@ -13,18 +13,22 @@
 1.	В первую очередь для тестов я установил Debian 12.5 на виртуальную машину VirtualBox
 2.	Затем нашел утилиту live-build, установил и начал разбираться как она работает.
 Как написано в документации для начала необходимо прописать команду  «lb config» и она создаст дерево директорий:
-   ![image](https://github.com/oleg310107/test-task/assets/80532580/e74c7c75-b0bc-4c57-b44d-8cdff64b3caa)
+
+  	![image](https://github.com/oleg310107/test-task/assets/80532580/e74c7c75-b0bc-4c57-b44d-8cdff64b3caa)
 
 Далее, следуя документации, необходимо в папку auto создать свой скрипт config:
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/b5634168-000b-474c-84c7-eee75de34f03)
 
 (Взял из примера в документации)
 
 Потом, необходимо настроить управление списком устанавливаемых пакетов. Для этого потребуется редактировать существующий файл config/package-lists/desktop.list.chroot. Для теста добавил туда несколько пакетов:
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/d4fd157f-39b7-4312-afb3-a849ee54a7ad)
 
 
 Теперь можно попробовать запустить lb build:
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/c52216f5-7115-4979-99c6-c2b5d3025ec6)
 
 Эта попытка завершилась ошибкой, и первое, что я подумал - пакет debootstrap не установлен, но проблема оказалась не в этом, и пришлось искать другие методы исправления. Помогло только переустановка всех нужных пакетов с их зависимостями.
@@ -70,19 +74,24 @@ sudo /usr/bin/lb build | tee $3
 # Тут можно дописать удаление временных данных, но, думаю, пока это не критично
 
 Запуск и проверка:
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/7eea4eda-f979-4219-a108-a8be19330e8b)
 
 …
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/6ed68c5a-8c4d-4afa-b3be-b44ba6ce8c00)
 
 Получилось, что был создан образ live-image-amd64.hybrid.iso:
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/fcca4e00-dcd7-4dad-b046-a8f4983c3db3)
 
 
 Проверил в virtualbox получившийся образ 
+  
   ![image](https://github.com/oleg310107/test-task/assets/80532580/dd877684-b85f-4c99-9a4f-eb4ece4d2235)
 ![image](https://github.com/oleg310107/test-task/assets/80532580/e2fccca5-dd50-4908-ab42-2568fbf4a226)
 
 И на примере «cmatrix» понял, что пакеты указанные в файле конфигурации действительно были включены в образ:
+ 
  ![image](https://github.com/oleg310107/test-task/assets/80532580/6281eeae-53cf-4a55-be4c-689401a1ba6d)
 
